@@ -13,6 +13,7 @@
     "@astrojs/cloudflare": "^6.8.0",
     "@astrojs/rss": "^2.4.4",
     "@astrojs/sitemap": "^2.0.2",
-    "astro": "^2.10.12"
+    "astro": "^2.10.12",
+    "node-gyp": "^9.4.0"
   }
 }
