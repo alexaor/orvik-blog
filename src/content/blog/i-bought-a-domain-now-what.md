@@ -31,3 +31,7 @@ This is starting out as a basic astro blog template, deployed using cloudflare. 
 2023-08-23T20:12:19.733189Z	Failed: build command exited with code: 1
 2023-08-23T20:12:20.644278Z	Failed: error occurred while running build command
 ```
+
+After some extensive googling I had my suspicion the problem either being the node version, or the packages being used. I started with getting rid of MDX, which didn't really change anything. The only thing that actually worked was replacing yarn with npm as my package manager, which is by no means an obvious solution. No one seems to have a similar problem either.
+
+Bless.
