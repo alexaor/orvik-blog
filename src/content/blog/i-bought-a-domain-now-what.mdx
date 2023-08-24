@@ -21,24 +21,23 @@ repository, describe what kind of project it was (Astro) and then deploy. Or so 
 
 The deployment kept failing with the same non-descriptive error message:
 ```bash
-023-08-23T20:12:13.895538Z	➤ YN0070: Migrating from Yarn 1; automatically enabling the compatibility node-modules linker 👍
-2023-08-23T20:12:13.896241Z
-2023-08-23T20:12:13.983405Z	➤ YN0000: ┌ Resolution step
-2023-08-23T20:12:15.346488Z	➤ YN0032: │ fsevents@npm:2.3.3: Implicit dependencies on node-gyp are discouraged
-2023-08-23T20:12:19.618628Z	➤ YN0002: │ @astrojs/mdx@npm:0.19.7 doesn't provide astro (p33450), requested by @astrojs/markdown-remark
-2023-08-23T20:12:19.619028Z	➤ YN0000: │ Some peer dependencies are incorrectly met; run yarn explain peer-requirements <hash> for details, where <hash> is the six-letter p-prefixed code
-2023-08-23T20:12:19.628629Z	➤ YN0000: └ Completed in 5s 645ms
-2023-08-23T20:12:19.669198Z	➤ YN0000: ┌ Post-resolution validation
-2023-08-23T20:12:19.669608Z	➤ YN0028: │ The lockfile would have been modified by this install, which is explicitly forbidden.
-2023-08-23T20:12:19.669889Z	➤ YN0000: └ Completed
-2023-08-23T20:12:19.670074Z	➤ YN0000: Failed with errors in 5s 687ms
-2023-08-23T20:12:19.723306Z	Error: Exit with error code: 1
-2023-08-23T20:12:19.724172Z	    at ChildProcess.<anonymous> (/snapshot/dist/run-build.js)
-2023-08-23T20:12:19.724535Z	    at Object.onceWrapper (node:events:652:26)
-2023-08-23T20:12:19.724869Z	    at ChildProcess.emit (node:events:537:28)
-2023-08-23T20:12:19.725327Z	    at ChildProcess._handle.onexit (node:internal/child_process:291:12)
-2023-08-23T20:12:19.733189Z	Failed: build command exited with code: 1
-2023-08-23T20:12:20.644278Z	Failed: error occurred while running build command
+➤ YN0070: Migrating from Yarn 1; automatically enabling the compatibility node-modules linker 👍
+➤ YN0000: ┌ Resolution step
+➤ YN0032: │ fsevents@npm:2.3.3: Implicit dependencies on node-gyp are discouraged
+➤ YN0002: │ @astrojs/mdx@npm:0.19.7 doesn't provide astro (p33450), requested by @astrojs/markdown-remark
+➤ YN0000: │ Some peer dependencies are incorrectly met; run yarn explain peer-requirements <hash> for details, where <hash> is the six-letter p-prefixed code
+➤ YN0000: └ Completed in 5s 645ms
+➤ YN0000: ┌ Post-resolution validation
+➤ YN0028: │ The lockfile would have been modified by this install, which is explicitly forbidden.
+➤ YN0000: └ Completed
+➤ YN0000: Failed with errors in 5s 687ms
+Error: Exit with error code: 1
+    at ChildProcess.<anonymous> (/snapshot/dist/run-build.js)
+    at Object.onceWrapper (node:events:652:26)
+    at ChildProcess.emit (node:events:537:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:291:12)
+Failed: build command exited with code: 1
+Failed: error occurred while running build command
 ```
 
 At first I thought it was an issue with supporting MDX `➤ YN0002: │ @astrojs/mdx@npm:0.19.7 doesn't provide astro (p33450), requested by @astrojs/`. But removing this from the project only removed it from the error logs, the error itself persisted. Most stack overflow threads mentioned that Cloudflare Pages was basically legacy, with very poor node support. But tweaking the versions didn't change that much either.
