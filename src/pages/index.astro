@@ -2,7 +2,7 @@
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import { SITE_TITLE, SITE_DESCRIPTION, YEARS_SINCE_DEV } from "../consts";
 ---
 
 <!DOCTYPE html>
@@ -13,8 +13,19 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
   <body>
     <Header title={SITE_TITLE} />
     <main>
-      <h1>Oh 👋 there!</h1>
-      <p>Stuff will come here eventually</p>
+      <h1>Hello!</h1>
+      <p>
+        I'm Alex, and welcome to my space. You can expect things. Not big
+        things, but things.
+      </p>
+      <p>
+        I've been in the web development scene for roughly {YEARS_SINCE_DEV} years. Before getting into web
+				I had some introductory CS courses in college, but things didn't really click before jumping on a django-based
+				web project at a volunteer group at the student society at my college. Since then I've finished my degree and now I work as
+				an IT-consultant and need something to do in my spare time.
+      </p>
+
+			<p>Stay tuned.</p>
     </main>
     <Footer />
   </body>

@@ -1,7 +1,6 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import cloudflare from "@astrojs/cloudflare";
-
 import mdx from "@astrojs/mdx";
 
 // https://astro.build/config

@@ -1,0 +1,52 @@
+---
+title: "I bought a domain, now what?"
+description: "The first of many steps of my world wide web adventure"
+pubDate: "Aug 24 2023"
+---
+
+I recently bought a domain. Not for the first time, but this is my first purchase for personal use. Throughout my studies and other developer related work I have always had a lot of supporting infrastructure. Colleagues who have already set up deployment pipelines, where all I had to to was push something to a git repository. Not that this is an issue, but at the end of the day I sit with the feeling that my hand needs to be held if I want to do anything on the web by myself, or any other software project for that matter.
+
+I intend for that to change. And where else to start, than buying a domain! But now what? This domain needs to lead somewhere, and what should I be hosting? Good writing skills are few and far between, mine being no exception to this rule.
+
+### Parking in an empty parking lot
+
+My issue with modern cloud solutions probably has to be the vast amount of options available. I have minor experience with AWS, but it is still pretty intimidating. And their invoices are nothing short of terrifying. The first other option that comes to mind would maybe be Google's GCP, but their track record for abandoning their own projects is at this point just impressive. A
+friend of mine had recently been playing around with Cloudflare for hosting and here we are.
+
+The process has been simultaneously panless and painful. Getting this domain to point at a cloudflare deployment was very simple.
+Simply get the domain-registrar (which in this case is <a target="_blank" href="https://porkbun.com/">Porkbun</a>) to point at
+the Cloudflare name-servers. The deployment itself was a bit more tricky. At first glance it looked like it was going to be
+extremely simple. The Cloudflare dashboard has an easy-to-use interface and all I had to do was connect a page to a git
+repository, describe what kind of project it was (Astro) and then deploy. Or so I thought.
+
+The deployment kept failing with the same non-descriptive error message:
+```bash
+023-08-23T20:12:13.895538Z	➤ YN0070: Migrating from Yarn 1; automatically enabling the compatibility node-modules linker 👍
+2023-08-23T20:12:13.896241Z
+2023-08-23T20:12:13.983405Z	➤ YN0000: ┌ Resolution step
+2023-08-23T20:12:15.346488Z	➤ YN0032: │ fsevents@npm:2.3.3: Implicit dependencies on node-gyp are discouraged
+2023-08-23T20:12:19.618628Z	➤ YN0002: │ @astrojs/mdx@npm:0.19.7 doesn't provide astro (p33450), requested by @astrojs/markdown-remark
+2023-08-23T20:12:19.619028Z	➤ YN0000: │ Some peer dependencies are incorrectly met; run yarn explain peer-requirements <hash> for details, where <hash> is the six-letter p-prefixed code
+2023-08-23T20:12:19.628629Z	➤ YN0000: └ Completed in 5s 645ms
+2023-08-23T20:12:19.669198Z	➤ YN0000: ┌ Post-resolution validation
+2023-08-23T20:12:19.669608Z	➤ YN0028: │ The lockfile would have been modified by this install, which is explicitly forbidden.
+2023-08-23T20:12:19.669889Z	➤ YN0000: └ Completed
+2023-08-23T20:12:19.670074Z	➤ YN0000: Failed with errors in 5s 687ms
+2023-08-23T20:12:19.723306Z	Error: Exit with error code: 1
+2023-08-23T20:12:19.724172Z	    at ChildProcess.<anonymous> (/snapshot/dist/run-build.js)
+2023-08-23T20:12:19.724535Z	    at Object.onceWrapper (node:events:652:26)
+2023-08-23T20:12:19.724869Z	    at ChildProcess.emit (node:events:537:28)
+2023-08-23T20:12:19.725327Z	    at ChildProcess._handle.onexit (node:internal/child_process:291:12)
+2023-08-23T20:12:19.733189Z	Failed: build command exited with code: 1
+2023-08-23T20:12:20.644278Z	Failed: error occurred while running build command
+```
+
+At first I thought it was an issue with supporting MDX `➤ YN0002: │ @astrojs/mdx@npm:0.19.7 doesn't provide astro (p33450), requested by @astrojs/`. But removing this from the project only removed it from the error logs, the error itself persisted. Most stack overflow threads mentioned that Cloudflare Pages was basically legacy, with very poor node support. But tweaking the versions didn't change that much either.
+
+What did the trick? Nuking yarn as the package manager.
+
+Non-descriptive and deceptive error messages probably has to be the bane of my existence. There is nothing in this error log that screams `STOP USING YARN`. There also is nothing on their documentaiton that mentions not to use yarn either. I also feel like I'm getting tricked when the logs explicitly state `Migrating from Yarn 1; automatically enabling the compatibility node-modules linker 👍` as if they have native support for yarn that automagically fixes everything for you.
+
+But hey! Now the blog is live, under my custom domain.
+
+Bless.
